@@ -19,7 +19,13 @@ const AllSightings = () => {
   }, [sightingList])
 
   const allSightings = sightingList?.map(sighting => {
-    return <SightingCard />
+    return(
+      <SightingCard
+        id={sighting.id}
+        location={sighting.location}
+        description={sighting.description}
+      />
+    )
   })
 
   return(
