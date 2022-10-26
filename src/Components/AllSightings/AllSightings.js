@@ -21,6 +21,7 @@ const AllSightings = () => {
   const allSightings = sightingList?.map(sighting => {
     return(
       <SightingCard
+        key={sighting.id}
         id={sighting.id}
         location={sighting.location}
         description={sighting.description}
@@ -31,6 +32,9 @@ const AllSightings = () => {
   return(
     <article>
       <h2>Documented Sightings</h2>
+      {!sightingList.length &&
+        <h4>Loading...</h4>
+      }
       {allSightings}
     </article>
   )
