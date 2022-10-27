@@ -1,7 +1,7 @@
 export const retrieveSightings = async () => {
   const response = await fetch('http://localhost:3001/sightings')
-    const data = await errorHandler(response)
-    return data
+  const data = await errorHandler(response)
+  return data
 }
 
 export const reportSighting = async (sightingInfo) => {
