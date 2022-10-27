@@ -1,13 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import SightingCard from '../SightingCard/SightingCard'
+import { retrieveSightings } from '../../utilities/ApiCalls'
 
 const AllSightings = () => {
   const [sightingList, setSightingList] = useState([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let mounted = true
+    retrieveSightings()
+      .then(sightings => {
+        if(mounted) {
+          setSightingList(sightings)
+        }
+      })
+      .catch(error => setError('Unable to retrieve data'))
+    return () => mounted = false
+  }, [sightingList])
+
+  const allSightings = sightingList?.map(sighting => {
+    return(
+      <SightingCard
+        key={sighting.id}
+        id={sighting.id}
+        location={sighting.location}
+        description={sighting.description}
+      />
+    )
+  })
 
   return(
     <article>
       <h2>Documented Sightings</h2>
-      <SightingCard />
+      {!sightingList.length &&
+        <h4>Loading...</h4>
+      }
+      {allSightings}
     </article>
   )
 }

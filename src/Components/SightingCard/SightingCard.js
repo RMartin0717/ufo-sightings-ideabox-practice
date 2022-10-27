@@ -1,6 +1,10 @@
-const SightingCard = () => {
+const SightingCard = ({ id, location, description }) => {
   return(
-    <h3>Sighting Card</h3>
+    <section>
+      <h3>Sighting {id}</h3>
+      <h4>Location: {location}</h4>
+      <p>{description}</p>
+    </section>
   )
 }
 
